@@ -2,14 +2,12 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "vite"
-},
-  "keywords": [],
-  "author": "",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "vite": "^8.1.1"
   }

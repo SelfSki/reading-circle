@@ -11,6 +11,7 @@ backend/node_modules/
 
 # Personal notes
 notes/
+frontend/dist/
 
 # OS files
 .DS_Store
