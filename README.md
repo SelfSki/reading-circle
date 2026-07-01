@@ -1,35 +1,28 @@
-# 📚 The Reading Circle
+# Reading Circle
 
-A minimal web application for managing a shared reading circle.
+A personal digital bookshelf built with JavaScript, Node.js, Express and PostgreSQL.
 
-The project is being built from scratch using only vanilla HTML, CSS and JavaScript as a way to learn professional software architecture without relying on frameworks.
+## Features
 
----
+- 📚 Search books
+- 📖 Track reading progress
+- ⭐ Rate finished books
+- 🔐 Admin mode
+- 💾 PostgreSQL persistence
+- 📱 Responsive UI
 
-## Vision
-
-Build a beautiful, maintainable application that grows gradually from a static webpage into a fully featured reading platform.
-
----
-
-## Technology
+## Tech Stack
 
 - HTML
 - CSS
 - JavaScript
-- Git (coming soon)
-- GitHub Pages (coming soon)
-- Supabase (coming soon)
-
----
+- Node.js
+- Express
+- PostgreSQL
 
 ## Current Status
 
 🚧 In Development
-
-Version: 0.1.0
-
----
 
 ## Philosophy
 
