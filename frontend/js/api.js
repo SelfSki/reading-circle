@@ -1,5 +1,8 @@
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL =
+    window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://reading-circle-api.onrender.com";
 
 
 export async function fetchBooks() {
@@ -90,7 +93,7 @@ export async function deleteBook(bookId) {
 export async function updateBook(book) {
     const response =
         await fetch(
-            `http://localhost:3000/books/${book.id}`,
+            `${API_BASE_URL}/books/${book.id}`,
             {
                 method: "PATCH",
                 headers: {
