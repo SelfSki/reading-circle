@@ -145,12 +145,14 @@ library.addEventListener("click", function (event) {
     
     const progressBar = event.target.closest(".edit-progress");
     if (progressBar) {
+        if (!isAdmin) return;
         editProgress(Number(progressBar.dataset.index));
         return;
     }
        
     const ratingButton = event.target.closest(".edit-rating");
     if (ratingButton) {
+        if (!isAdmin) return;
         editRating(Number(ratingButton.dataset.index));
     }
 });
@@ -318,12 +320,9 @@ async function deleteBook(index) {
     }
 }
 
+/*
 async function editProgress(index){
-    const newProgress = Number(
-        prompt(
-            "Reading Progress (0-100)",
-            books[index].progress
-        )
+    const newProgress = Number(prompt("Reading Progress (0-100)",books[index].progress)
     );
     if(isNaN(newProgress) || newProgress < 0 || newProgress > MAX_PROGRESS){
         return;
@@ -347,9 +346,9 @@ async function editProgress(index){
                 "Unable to update progress."
             );
         }
-}
+}*/
 
-
+/*
 async function editRating(index){
     const newRating = Number(
         prompt(
@@ -380,8 +379,69 @@ async function editRating(index){
             "Unable to update rating."
         );
     }
+}*/
+
+async function editRating(index){
+    const input = prompt(
+        "Rating (1-5)",
+        books[index].rating
+    );
+    if (input === null) {
+        return;     // User cancelled
+    }
+    const newRating = Number(input);
+    if (
+        isNaN(newRating) ||
+        newRating < 0 ||
+        newRating > MAX_RATING
+    ){
+        return;
+    }
+    books[index].rating = newRating;
+    try {
+        await updateBook(books[index]);
+        const databaseBooks = await fetchBooks();
+        books.length = 0;
+        books.push(...databaseBooks);
+        refreshLibrary();
+    }
+    catch(error){
+        console.error(error);
+        alert("Unable to update rating.");
+    }
 }
 
+
+async function editProgress(index){
+    const input = prompt(
+        "Reading Progress (0-100)",
+        books[index].progress
+    );
+    if (input === null) {
+        return;     // User cancelled
+    }
+    const newProgress = Number(input);
+    if (
+        isNaN(newProgress) ||
+        newProgress < 0 ||
+        newProgress > MAX_PROGRESS
+    ){
+        return;
+    }
+    books[index].progress = newProgress;
+    try {
+        await updateBook(books[index]);
+        const databaseBooks = await fetchBooks();
+        books.length = 0;
+        books.push(...databaseBooks);
+
+        refreshLibrary();
+    }
+    catch(error){
+        console.error(error);
+        alert("Unable to update progress.");
+    }
+}
 
 
 function createSearchResultCard(book, index) {

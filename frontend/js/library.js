@@ -5,7 +5,7 @@ const MAX_RATING = 5;
     Rendering export functions
 ==========================================*/
 
-export function createBookStatus(book, index) {
+export function createBookStatus(book, index, isAdmin) {
     if (book.status === "currently-reading") {
         return `
            <div class="progress-container">
@@ -16,7 +16,8 @@ export function createBookStatus(book, index) {
                 </div>
 
                 <div
-                    class="progress-bar edit-progress"
+                    <div
+                    class="progress-bar ${isAdmin ? "edit-progress admin-editable" : ""}"
                     data-index="${index}"
                 >
                     <div
@@ -32,17 +33,16 @@ export function createBookStatus(book, index) {
     if (book.status === "finished") {
         return `
             <div
-                class="book-rating edit-rating"
+                class="book-rating ${isAdmin ? "edit-rating admin-editable" : ""}"
                 data-index="${index}"
             >
             <span class="rating-stars">
-                ${"★".repeat(book.rating)}
-                ${"☆".repeat(MAX_RATING-book.rating)}
+                ${createStars(book.rating)}
             </span>
-            
+
             <span class="rating-text">
                 ${book.rating === 0
-                    ? "Rate me"
+                    ? "Rate"
                     :`${book.rating}/5`       
                 } 
             </span>
@@ -52,6 +52,22 @@ export function createBookStatus(book, index) {
     return "";
 } // ← createBookStatus ENDS HERE
 
+
+function createStars(rating) {
+    let stars = "";
+    for (let i = 1; i <= MAX_RATING; i++) {
+        stars += `
+            <span class="${
+                i <= rating
+                    ? "star filled"
+                    : "star empty"
+            }">
+                ★
+            </span>
+        `;
+    }
+    return stars;
+} // Create Stars
 
 
 export function createBookCard(book, index, isAdmin) {
@@ -93,7 +109,7 @@ export function createBookCard(book, index, isAdmin) {
             </div>
             ` : ""}
         </div>
-        ${createBookStatus(book,index)}
+        ${createBookStatus(book,index, isAdmin)}
         </div>
     </div>
     `;

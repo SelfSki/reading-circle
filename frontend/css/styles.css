@@ -242,7 +242,7 @@ body {
 
 .book-card{
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: var(--space-md);
     width:100%;
     max-width: 370px;
@@ -317,19 +317,29 @@ body {
 
 .book-card img{
     width:110px;
+    align-self:center;
     height: auto;
     object-fit:cover;
     border-radius:8px;
     flex-shrink:0;
 }
 
+/*
+.book-info{
+    flex:1;
+    display:flex;
+    min-height:0;
+    min-width:0;
+    flex-direction:column;
+    justify-content:space-between;
+}*/
+
 .book-info{
     flex:1;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
-    padding-right:var(--space-md);
 }
+
 
 
 /* ==========================================
@@ -390,16 +400,54 @@ body {
 }
 
 
-.book-rating{
-    font-size:1.6rem;
-    color:#F4B400;
+/*.book-rating{
     display:flex;
     align-items:center;
     gap:10px;
-    cursor:pointer;
+
     margin-top:8px;
+
+    cursor:pointer;
     user-select:none;
-    letter-spacing:2px;
+    flex-wrap:nowrap;
+    background:red;
+}*/
+
+
+.book-rating{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor: default;
+    flex-wrap:nowrap;
+    margin-top:auto;
+}
+
+.rating-stars{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.star{
+    font-size:1.6rem;
+    line-height:1;
+}
+
+.star.filled{
+    color:#F4B400;
+}
+
+.star.empty{
+    color:#E0E0E0;
+}
+
+.rating-text{
+    white-space:nowrap;
+    margin-left:10px;
 }
 
 .edit-progress:hover,
@@ -407,17 +455,25 @@ body {
     opacity:.8;
 }
 
-
 .rating-text{
-    margin-left:10px;
+    margin-left:auto;
+
     padding:4px 10px;
+
+    min-width:55px;
+
+    text-align:center;
+    white-space:nowrap;
+
     font-size:.85rem;
     font-weight:600;
+
     color:var(--shelf-color);
+
     border:1px solid var(--shelf-color);
     border-radius:5px;
+
     background:transparent;
-    letter-spacing:0;
 }
 
 /* ==========================================
@@ -867,5 +923,17 @@ For mobile responsiveness
 
     .modal-actions button{
         width:100%;
+    }
+
+    .book-rating{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        width:100%;
+    }
+
+    .rating-text{
+        margin-left: 0;
     }
 }
